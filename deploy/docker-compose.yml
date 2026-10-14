@@ -1,0 +1,61 @@
+# Stack de producción Marsmode (gimnasio) — imagen de app + tunnel
+#
+#   docker compose --env-file app/.env.production -f deploy/docker-compose.yml up -d
+#
+# web:        imagen marsmode-web (build app/Dockerfile: npm ci + vite build
+#             con las VITE_* como ARGs + nginx). Sin bind mount de dist:
+#             lo que sirve el sitio es la imagen, inmutable.
+# cloudflared: tunnel Cloudflare que publica gym.marsmode.me con HTTPS
+#
+# El tunnel usa credenciales en /home/dev/.cloudflared del host WSL
+# (fuera del repo). El Supabase local corre aparte (docker/volumes de
+# supabase cli) y se alcanza por la red externa supabase_network_gimnasio.
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: app/Dockerfile
+      args:
+        # :? exige las variables: imposible levantar una app sin configurar
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:?falta VITE_SUPABASE_URL — app/.env.production}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY:?falta VITE_SUPABASE_ANON_KEY — app/.env.production}
+    image: marsmode-web:latest
+    container_name: marsmode-web-prod
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3112:80"
+    networks:
+      - marsmode_network
+      - supabase_network_gimnasio
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:80/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    mem_limit: 128m
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: marsmode-cloudflared
+    restart: unless-stopped
+    # --protocol http2: tras CGNAT el QUIC degrada (requests con body -> 502);
+    # HTTP/2 sobre TCP es estable (misma lección que odontoflow).
+    command: tunnel --no-autoupdate --protocol http2 --config /etc/cloudflared/config.yml run
+    volumes:
+      - ./cloudflared/config.yml:/etc/cloudflared/config.yml:ro
+      - /home/dev/.cloudflared:/etc/cloudflared/creds:ro
+    depends_on:
+      web:
+        condition: service_healthy
+    networks:
+      - marsmode_network
+    mem_limit: 256m
+
+networks:
+  marsmode_network:
+    name: marsmode_network
+  supabase_network_gimnasio:
+    external: true
+    name: supabase_network_gimnasio

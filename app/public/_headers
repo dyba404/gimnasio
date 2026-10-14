@@ -1,0 +1,36 @@
+# Cloudflare Pages — headers estáticos para Marsmode (SPA + PWA)
+# Se copia a dist/ en cada build (vite copia public/). Máx. 100 reglas.
+# NUNCA usar regla /* con Cache-Control: al solaparse con las de abajo,
+# Cloudflare une los valores con coma y rompe la directiva.
+# Reglas mutuamente excluyentes, verificadas contra el árbol real de dist/.
+
+# --- Service worker: SIEMPRE fresco (crítico para registerType:autoUpdate) ---
+# no-cache => el edge de Cloudflare no cachea y el navegador revalida cada vez.
+/sw.js
+  Cache-Control: no-cache
+
+# workbox-<hash>.js cambia de nombre con cada build => immutable 1 año
+/workbox-*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# registerSW.js NO lleva hash => siempre revalidar
+/registerSW.js
+  Cache-Control: no-cache
+
+# Manifest: revalidar (iOS lo lee solo al instalar; Android lo cachea igual)
+/manifest.webmanifest
+  Cache-Control: no-cache
+
+# --- Assets con hash de Vite (/assets/index-XXXX.js): cache largo ---
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# index.html y el resto (favicon.svg, PNGs de iconos sin hash): se sirve con
+# el default de Pages "public, max-age=0, must-revalidate" + ETag/304 — no
+# tocar aquí para no duplicar Cache-Control con las reglas de arriba.
+
+# SPA fallback: NO se usa _redirects. Pages detecta SPA cuando no existe
+# 404.html en la raíz y reescribe rutas desconocidas a /index.html.
+# Un _redirects "/* /index.html 200" ENMASCARARÍA los assets reales
+# (docs: "Redirects are always followed, regardless of whether or not an
+# asset matches the incoming request") => no añadir, rompe el bundle.

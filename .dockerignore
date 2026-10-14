@@ -1,0 +1,22 @@
+# Contexto de build: SOLO código fuente de la app + deploy/nginx.conf.
+# Todo lo demás (docs, supabase, scripts, leads, .env*) queda fuera —
+# en particular **/.env* garantiza que ningún archivo .env local entre
+# a la imagen: las VITE_* llegan únicamente como build ARGs.
+**/node_modules
+**/dist
+**/.env*
+**/.git
+**/.gitignore
+.opencode
+.zcode
+docs
+scripts
+supabase
+PROGRESS.md
+AGENTS.md
+guiones_contacto.md
+flyer*.html
+*.csv
+*.log
+qr.png
+app/README.md

@@ -1,0 +1,16 @@
+-- Alta de un CLIENTE NUEVO (gimnasio real) — correr una vez por cliente.
+--
+-- PASO 1: crea el gym vacío con planes de arranque.
+--   Reemplaza 'Marsmode Fitness' si quieres otro nombre visible.
+-- PASO 2: crea el usuario del dueño en Authentication → Users → Add user
+--   (email + contraseña, "Auto Confirm User").
+-- PASO 3: asocia el usuario al gym creado (PASO 1-b) y ejecuta.
+--
+-- Después de esto, el dueño entra por /login con su correo y TODO lo demás
+-- (socios, planes editables, membresías, caja, etc.) lo hace desde la app.
+
+-- 1-b) Asociar dueño: ajusta el email y descomenta.
+-- update public.gyms
+-- set owner_id = (select id from auth.users where email = 'dueno@migym.pe')
+-- where nombre = 'Marsmode Fitness'
+--   and owner_id is null;

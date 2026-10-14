@@ -1,0 +1,37 @@
+# dependencias
+node_modules/
+app/node_modules/
+
+# entorno (nunca commitear)
+.env
+.env.*
+!.env.example
+app/.env*
+!app/.env.example
+
+# builds y logs
+app/dist/
+*.log
+dev-server.log
+
+# datos personales y material comercial — NUNCA al repo
+leads_gimnasios.csv
+leads_lima.csv
+guiones_contacto.md
+flyer.html
+flyer_academia.html
+qr.png
+
+# log de desarrollo con notas de negocio (precios, teléfono, estrategia)
+PROGRESS.md
+
+# supabase local
+supabase/.temp/
+
+# tooling de agentes
+.opencode/
+.zcode/
+
+# sistema
+.DS_Store
+Thumbs.db

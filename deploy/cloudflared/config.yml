@@ -1,0 +1,11 @@
+# Ingress del tunel Cloudflare para Marsmode gym (gym.marsmode.me).
+# Tunnel gym-marsmode (f04eb1a4) creado con el cert.pem de la cuenta CF;
+# credenciales en /home/dev/.cloudflared del host WSL, montadas read-only
+# en /etc/cloudflared/creds (mismo patrón que odontoflow/deploy/cloudflared).
+tunnel: f04eb1a4-f694-4543-ab61-5ce27909b45d
+credentials-file: /etc/cloudflared/creds/f04eb1a4-f694-4543-ab61-5ce27909b45d.json
+
+ingress:
+  - hostname: gym.marsmode.me
+    service: http://web:80
+  - service: http_status:404
