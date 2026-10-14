@@ -3,6 +3,23 @@
 SaaS multi-tenant de gestión para gimnasios peruanos, enfocado en el dolor #1 del rubro:
 membresías vencidas que nadie cobra. Desplegado en producción en [gym.marsmode.me](https://gym.marsmode.me).
 
+## Pantallas
+
+<p>
+  <img src="docs/screenshots/panel.png" width="49%" alt="Panel con KPIs y widget de morosidad con cobro por WhatsApp" />
+  <img src="docs/screenshots/socios.png" width="49%" alt="Lista de socios" />
+</p>
+<p>
+  <img src="docs/screenshots/checkin.png" width="49%" alt="Check-in con escáner QR TOTP" />
+  <img src="docs/screenshots/caja.png" width="49%" alt="Caja con Yape / Plin / efectivo" />
+</p>
+<p>
+  <img src="docs/screenshots/membresias.png" width="49%" alt="Membresías con vencimientos" />
+  <img src="docs/screenshots/reportes.png" width="49%" alt="Reportes con gráficos" />
+</p>
+
+*Capturas del modo demo local (`VITE_DEMO_MODE=1`, datos ficticios).*
+
 ## Características
 
 - **Socios y membresías** con estados visibles de un vistazo.
