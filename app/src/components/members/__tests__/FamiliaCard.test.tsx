@@ -1,3 +1,4 @@
+import { fechaHoyIso } from '@/mocks/bitacora'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { FamiliaCard } from '../FamiliaCard'
@@ -6,7 +7,9 @@ import { sociosMock, sumarDiasIso } from '@/mocks/data'
 import type { CuentaFamiliar, FacturaGrupo } from '@/mocks/familias'
 import type { Membresia } from '@/mocks/types'
 
-const HOY = '2026-09-11'
+// HOY dinamico, la misma fecha de referencia que usan los mocks (facturasMock):
+// fijado en '2026-09-11' la suite fallaba para cualquier fecha posterior.
+const HOY = fechaHoyIso()
 
 function render(props: Partial<Parameters<typeof FamiliaCard>[0]>): string {
   return renderToStaticMarkup(

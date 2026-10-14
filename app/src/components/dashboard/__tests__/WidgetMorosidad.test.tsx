@@ -170,7 +170,7 @@ describe('WidgetMorosidad — orden por monto y recorte a top 5', () => {
 describe('WidgetMorosidad — teléfono inválido deshabilita el botón de WhatsApp', () => {
   const socioSinTelefonoValido: Socio = {
     ...sociosMock[0],
-    telefono: '97611824',
+    telefono: '99987654',
   }
   const sociosInvalidos: ReadonlyMap<string, Socio> = new Map([
     [socioSinTelefonoValido.id, socioSinTelefonoValido],

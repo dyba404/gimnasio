@@ -1,10 +1,13 @@
+import { fechaHoyIso } from '@/mocks/bitacora'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { SociosEnRiesgo } from '../SociosEnRiesgo'
 import type { Asistencia } from '@/mocks/asistencias'
 import type { Membresia, Socio } from '@/mocks/types'
 
-const HOY_ISO = '2026-09-13'
+// HOY dinamico, la misma fecha de referencia que usan los mocks:
+// fijado en '2026-09-13' la suite fallaba para cualquier fecha posterior.
+const HOY_ISO = fechaHoyIso()
 
 function aIso(fecha: Date): string {
   const mes = String(fecha.getMonth() + 1).padStart(2, '0')
@@ -13,7 +16,7 @@ function aIso(fecha: Date): string {
 }
 
 function haceDiasIso(dias: number): string {
-  const fecha = new Date('2026-09-13T00:00:00')
+  const fecha = new Date(HOY_ISO + 'T00:00:00')
   fecha.setDate(fecha.getDate() - dias)
   return aIso(fecha)
 }

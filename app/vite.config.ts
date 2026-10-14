@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import path from 'node:path'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -48,6 +49,18 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(import.meta.dirname, './src'),
+    },
+  },
+  test: {
+    // Tests herméticos (fix de CI): la mayoría de las suites renderizan contra
+    // los mocks de src/mocks, que se activan con modo demo. En desarrollo local
+    // lo proveía el .env.development.local (sin trackear); en CI no existe y las
+    // páginas caían al estado "No hay datos". Fijarlo aquí hace la suite idéntica
+    // en cualquier runner. Los tests del camino "sin backend" (p. ej.
+    // MarketingPageBackend) mockean supabaseDisponible ellos mismos y no se ven
+    // afectados.
+    env: {
+      VITE_DEMO_MODE: '1',
     },
   },
 })

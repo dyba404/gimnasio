@@ -9,7 +9,7 @@ function render(telefono: string): string {
 }
 
 describe('BotonWhatsApp — teléfono válido', () => {
-  const html = render('976 118 240')
+  const html = render('999 876 543')
 
   it('genera el enlace wa.me con el número normalizado a 51 + 9 dígitos', () => {
     expect(html).toContain('href="https://wa.me/51999876543?text=')
@@ -28,7 +28,7 @@ describe('BotonWhatsApp — teléfono válido', () => {
 
 describe('BotonWhatsApp — teléfono inválido (enlace roto prevenido)', () => {
   it('8 dígitos: sin href a wa.me, aria-disabled y atenuado', () => {
-    const html = render('97611824')
+    const html = render('99987654')
     expect(html).not.toContain('wa.me')
     expect(html).not.toContain('href=')
     expect(html).toContain('aria-disabled="true"')
@@ -51,7 +51,7 @@ describe('BotonWhatsApp — teléfono inválido (enlace roto prevenido)', () => 
   })
 
   it('el texto del botón sigue visible para que el socio sepa que faltan datos', () => {
-    expect(render('97611824')).toContain('Cobrar por WhatsApp')
+    expect(render('99987654')).toContain('Cobrar por WhatsApp')
   })
 })
 

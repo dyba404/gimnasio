@@ -190,7 +190,7 @@ describe('pipelineDunning — agrupación por etapa', () => {
     const d4 = columnas.find((columna) => columna.etapa === 'd4')
     const moroso = d4?.morosos[0]
     expect(moroso?.ultimaGestion?.socioId).toBe('soc-04')
-    expect(moroso?.telefono).toBe('976 118 240')
+    expect(moroso?.telefono).toBe('999 876 543')
   })
 })
 

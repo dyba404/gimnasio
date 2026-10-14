@@ -64,7 +64,7 @@ export const sociosMock: readonly Socio[] = [
   { id: 'soc-01', codigo: 'MS-001', nombre: 'Rosa Ñahui Quispe', dni: '45782136', telefono: '987 214 503', planId: 'plan-mensual', estado: 'activo', fechaRegistro: desdeHoy(-240) },
   { id: 'soc-02', codigo: 'MS-002', nombre: 'Jorge Luis Ccahuana Ríos', dni: '40112958', telefono: '954 780 126', planId: 'plan-trimestral', estado: 'activo', fechaRegistro: desdeHoy(-410) },
   { id: 'soc-03', codigo: 'MS-003', nombre: 'María Gracia Belaúnde', dni: '44120765', telefono: '902 335 841', planId: 'plan-anual', estado: 'activo', fechaRegistro: desdeHoy(-680) },
-  { id: 'soc-04', codigo: 'MS-004', nombre: 'Kevin Rodrigo Muñoz', dni: '47890312', telefono: '976 118 240', planId: 'plan-student', estado: 'moroso', fechaRegistro: desdeHoy(-150) },
+  { id: 'soc-04', codigo: 'MS-004', nombre: 'Kevin Rodrigo Muñoz', dni: '47890312', telefono: '999 876 543', planId: 'plan-student', estado: 'moroso', fechaRegistro: desdeHoy(-150) },
   { id: 'soc-05', codigo: 'MS-005', nombre: 'Ana Sofía Rojas Paredes', dni: '42331874', telefono: '933 640 715', planId: 'plan-mensual', estado: 'activo', fechaRegistro: desdeHoy(-95) },
   { id: 'soc-06', codigo: 'MS-006', nombre: 'Luis Fernando Huamán', dni: '41552709', telefono: '918 072 334', planId: 'plan-trimestral', estado: 'activo', fechaRegistro: desdeHoy(-320) },
   { id: 'soc-07', codigo: 'MS-007', nombre: 'Carmen Rosa Ñaupari', dni: '46998123', telefono: '945 509 682', planId: 'plan-mensual', estado: 'congelado', fechaRegistro: desdeHoy(-210) },

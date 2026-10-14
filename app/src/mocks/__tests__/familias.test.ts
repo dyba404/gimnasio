@@ -1,3 +1,4 @@
+import { fechaHoyIso } from '../bitacora'
 import { describe, expect, it } from 'vitest'
 import type { FacturaGrupo } from '../familias'
 import {
@@ -13,7 +14,9 @@ import { membresiasMock, sociosMock, sumarDiasIso } from '../data'
 import type { CuentaFamiliar, FacturaGrupo as FacturaGrupoTipo } from '../familias'
 import type { Membresia } from '../types'
 
-const HOY = '2026-09-11'
+// HOY dinamico, la misma fecha de referencia que usan los mocks (data.ts):
+// fijado en '2026-09-11' la suite fallaba para cualquier fecha posterior.
+const HOY = fechaHoyIso()
 
 function venceEn(dias: number): string {
   return sumarDiasIso(HOY, dias)

@@ -32,40 +32,40 @@ describe('formatoFecha', () => {
 describe('normalizarTelefono', () => {
   it('acepta 5 formatos de escritura y produce el mismo resultado', () => {
     const esperado = '51999876543'
-    expect(normalizarTelefono('976 118 240')).toBe(esperado)
+    expect(normalizarTelefono('999 876 543')).toBe(esperado)
     expect(normalizarTelefono('999876543')).toBe(esperado)
-    expect(normalizarTelefono('+51 976 118 240')).toBe(esperado)
+    expect(normalizarTelefono('+51 999 876 543')).toBe(esperado)
     expect(normalizarTelefono('51999876543')).toBe(esperado)
     expect(normalizarTelefono('+51999876543')).toBe(esperado)
   })
 
   it('elimina guiones y otros separadores', () => {
-    expect(normalizarTelefono('976-118-240')).toBe('51999876543')
+    expect(normalizarTelefono('999-876-543')).toBe('51999876543')
   })
 
   it('no duplica el prefijo 51 cuando ya viene con país', () => {
-    expect(normalizarTelefono('+51 976 118 240')).toBe('51999876543')
+    expect(normalizarTelefono('+51 999 876 543')).toBe('51999876543')
     expect(normalizarTelefono('51999876543')).toBe('51999876543')
   })
 
   it('decisión documentada: con 9 dígitos antepone 51; con cualquier otra longitud devuelve los dígitos tal cual', () => {
-    expect(normalizarTelefono('97611824')).toBe('97611824')
-    expect(normalizarTelefono('5197611824')).toBe('5197611824')
+    expect(normalizarTelefono('99987654')).toBe('99987654')
+    expect(normalizarTelefono('5199987654')).toBe('5199987654')
     expect(normalizarTelefono('')).toBe('')
   })
 })
 
 describe('telefonoValido', () => {
   it('acepta un celular peruano escrito en 5 formatos', () => {
-    expect(telefonoValido('976 118 240')).toBe(true)
+    expect(telefonoValido('999 876 543')).toBe(true)
     expect(telefonoValido('999876543')).toBe(true)
-    expect(telefonoValido('+51 976 118 240')).toBe(true)
+    expect(telefonoValido('+51 999 876 543')).toBe(true)
     expect(telefonoValido('51999876543')).toBe(true)
     expect(telefonoValido('+51999876543')).toBe(true)
   })
 
   it('rechaza 8 dígitos (número truncado)', () => {
-    expect(telefonoValido('97611824')).toBe(false)
+    expect(telefonoValido('99987654')).toBe(false)
     expect(telefonoValido('976 118 24')).toBe(false)
   })
 
@@ -81,7 +81,7 @@ describe('telefonoValido', () => {
   })
 
   it('rechaza prefijo 51 incompleto (10 dígitos totales)', () => {
-    expect(telefonoValido('5197611824')).toBe(false)
+    expect(telefonoValido('5199987654')).toBe(false)
   })
 
   it('rechaza longitud excesiva (más de 51 + 9 dígitos)', () => {
@@ -195,7 +195,7 @@ describe('construirMensajeRecordatorio', () => {
 
 describe('enlaceWhatsApp', () => {
   it('usa dominio wa.me con teléfono normalizado con prefijo 51', () => {
-    const enlace = enlaceWhatsApp('976 118 240', 'hola')
+    const enlace = enlaceWhatsApp('999 876 543', 'hola')
     expect(enlace.startsWith('https://wa.me/51999876543?text=')).toBe(true)
   })
 
