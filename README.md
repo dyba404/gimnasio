@@ -1,7 +1,7 @@
 # Marsmode — SaaS de gestión para gimnasios
 
-SaaS multi-tenant de gestión para gimnasios peruanos, enfocado en el dolor #1 del rubro:
-membresías vencidas que nadie cobra. Desplegado en producción en [gym.marsmode.me](https://gym.marsmode.me).
+SaaS de gestión para gimnasios, enfocado en el dolor #1 del rubro: membresías vencidas
+que nadie cobra. Multi-tenant con aislamiento real por RLS.
 
 ## Pantallas
 
@@ -71,5 +71,6 @@ rollback (`scripts/gym.ps1`). Checklist completo en `docs/CHECKLIST-DEPLOY.md`.
 
 ## Estado
 
-En producción con clientes reales. El log de desarrollo (sprints, decisiones con su
-porqué y lecciones de deploy) se mantiene privado por contener notas de negocio.
+Proyecto completo y funcional: las 62 suites de test corren en verde en CI y el deploy
+está documentado con checklist y rollback. El log de desarrollo (sprints, decisiones y
+lecciones) se mantiene privado.
